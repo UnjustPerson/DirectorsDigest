@@ -4,13 +4,14 @@
 A simple Android application showing lists of directors and their films. Data is fetched from a remote source and stored into the local database.
 
 ## Done with use of:
-- MVVM architecure
-- Single activity with fragments, navigation is done through FragmentTransactions
-- Retrofit for network calls
-- Room to ease the implementation of local caching
-- ViewBinding to more easily write code that interacts with views
-- Coroutines to avoid using callbacks and do data source calls on background threads
-- LiveData for notifying observers in the view while being lifecycle aware
+- [MVVM architecure](https://cdn-blog.scalablepath.com/uploads/2021/12/mvvm-reactive-architecture-1024x937.png)
+- Single activity with fragments, navigation is done through [fragment transactions](https://developer.android.com/guide/fragments/transactions)
+- [Retrofit](https://square.github.io/retrofit/) for network calls
+- [Room](https://developer.android.com/training/data-storage/room) to ease the implementation of local caching
+- [ViewBinding](https://developer.android.com/topic/libraries/view-binding) to more easily write code that interacts with views
+- [Coroutines](https://developer.android.com/kotlin/coroutines) to avoid using callbacks and do data source calls on background threads
+- [LiveData](https://developer.android.com/topic/libraries/architecture/livedata) for notifying observers in the view while being lifecycle aware
+- [Dagger Hilt](https://dagger.dev/hilt/) for dependecy injection
  
  ## LICENSE
 ```
