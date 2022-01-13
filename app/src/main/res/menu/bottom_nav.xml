@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/directors"
+        android:title="Directors"
+        android:icon="@drawable/ic_director_icon"/>
+
+    <item
+        android:id="@+id/films"
+        android:title="Films"
+        android:icon="@drawable/ic_video_horizontal"/>
+
+</menu>

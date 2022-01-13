@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/outer_layout"
+    android:layout_weight="1"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+        <FrameLayout
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="0.45">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:padding="5dp"
+                    android:id="@+id/director_image"
+                    android:adjustViewBounds = "true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center|top"
+                    android:scaleType="centerCrop"
+                    tools:srcCompat="@tools:sample/avatars" />
+
+                <TextView
+                    app:layout_constraintBottom_toBottomOf="@id/director_image"
+                    app:layout_constraintEnd_toEndOf="@id/director_image"
+                    android:layout_width="180dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/director_name"
+                    android:textSize="31sp"
+                    android:text="@string/tommy_wiseau"
+                    android:fontFamily="@font/raleway_medium"
+                    android:layout_marginBottom="15dp"
+                    android:textAlignment="textEnd"
+                    android:cropToPadding="true"
+                    android:textColor="#FCC931"
+                    android:elevation="6dp"
+                    android:layout_marginEnd="22dp"
+                    android:paddingEnd="14dp"
+                    android:singleLine="false"
+                    tools:text="Filip Stanki"
+                    android:minLines="2"
+                    android:lines="2"
+                    android:layout_gravity="bottom|end"/>
+
+        </FrameLayout>
+
+        <TextView
+            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
+            android:layout_weight="0.1"
+            android:layout_height="wrap_content"
+            android:id="@+id/director_biography"
+            tools:text="dragance vezba"
+            android:layout_gravity="bottom|center"
+            android:textColor="@color/brown_text"
+            android:textSize="16sp"
+            android:fontFamily="@font/raleway_medium"
+            android:maxLines="12"
+            android:lines="12" />
+
+
+</LinearLayout>
+
+
+
+
+
+

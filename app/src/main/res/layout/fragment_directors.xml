@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/alfredo"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.MainActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/header"
+        android:fontFamily="@font/raleway_semibold"
+        android:text="Directors Digest"
+        android:textSize="36sp"
+        android:textColor="@color/reddish_text"
+        android:padding="20dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/loading_animation"
+        android:adjustViewBounds="true"
+        app:lottie_rawRes="@raw/on_loading"
+        android:elevation="2dp"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.yarolegovich.discretescrollview.DiscreteScrollView
+        android:layout_width="0dp"
+        app:layout_constraintWidth_percent="1"
+        android:layout_height="wrap_content"
+        tools:listitem="@layout/director_item"
+        android:id="@+id/directors_recycler"
+        app:dsv_orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf ="@id/header" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:fillViewport="true"
+    android:background="@color/alfredo"
+    android:layout_height="match_parent">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:background="@color/alfredo"
+        android:layout_height="match_parent">
+
+    <!--    <androidx.appcompat.widget.AppCompatImageView
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:id="@+id/back_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="6dp"
+            android:background="@drawable/ic_arrow_back"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="32dp"/>-->
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:scaleType="center"
+            android:layout_height="0dp"
+            android:id="@+id/film_photo"
+            android:adjustViewBounds="true"
+            app:layout_constraintHeight_percent="0.32"
+            tools:background="@drawable/tommy"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="0dp"
+            app:layout_constraintWidth_percent="0.8"
+            android:layout_height="wrap_content"
+            tools:text = "The Room"
+            android:id="@+id/film_name"
+            android:textSize="39sp"
+            android:textColor="@color/reddish_text"
+            android:fontFamily="@font/raleway_medium"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="35dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf="@id/film_photo" />
+
+
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            tools:text = "@string/room_synopsis"
+            android:id="@+id/film_synopsis"
+            android:textSize="16sp"
+            android:textColor="@color/brown_text"
+            android:fontFamily="@font/raleway_medium"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="35dp"
+            android:layout_marginStart="35dp"
+            android:layout_marginTop="24dp"
+            app:layout_constraintTop_toBottomOf="@id/film_name" />
+
+        <WebView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_percent="0.28"
+            android:id="@+id/film_trailer"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="35dp"
+            android:layout_marginStart="35dp"
+            android:layout_marginTop="24dp"
+            app:layout_constraintTop_toBottomOf="@id/film_synopsis" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text = "Director:"
+            android:text = "Director:"
+            android:id="@+id/director_placeholder"
+            android:textSize="16sp"
+            android:textColor="@color/reddish_text"
+            android:fontFamily="@font/raleway_medium"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginEnd="35dp"
+            android:layout_marginStart="35dp"
+            android:layout_marginTop="24dp"
+            app:layout_constraintTop_toBottomOf="@id/film_trailer" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            tools:text = "Tommy Wiseau"
+            android:text = "@string/tommy_wiseau"
+            android:id="@+id/director_name"
+            android:textSize="16sp"
+            android:textColor="@color/brown_text"
+            android:fontFamily="@font/raleway_medium"
+            app:layout_constraintStart_toEndOf="@id/director_placeholder"
+            android:layout_marginEnd="35dp"
+            android:layout_marginStart="35dp"
+            android:layout_marginTop="24dp"
+            app:layout_constraintTop_toBottomOf="@id/film_trailer" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text = "Screenplay:"
+            android:text = "Screenplay:"
+            android:id="@+id/screenplay_placeholder"
+            android:textSize="16sp"
+            android:textColor="@color/reddish_text"
+            android:fontFamily="@font/raleway_medium"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginEnd="35dp"
+            android:layout_marginStart="35dp"
+            android:layout_marginTop="12dp"
+            app:layout_constraintTop_toBottomOf="@id/director_placeholder" />
+
+        <TextView
+            android:layout_width="0dp"
+            app:layout_constraintWidth_percent="0.6"
+            android:layout_height="wrap_content"
+            tools:text = "Tommy Wiseau"
+            android:text = "@string/tommy_wiseau"
+            android:id="@+id/screenwriter_name"
+            android:textSize="16sp"
+            android:textColor="@color/brown_text"
+            android:fontFamily="@font/raleway_medium"
+            app:layout_constraintStart_toEndOf="@id/director_placeholder"
+            android:layout_marginEnd="35dp"
+            android:layout_marginStart="35dp"
+            android:layout_marginTop="12dp"
+            android:paddingBottom="36dp"
+            app:layout_constraintTop_toBottomOf="@id/director_placeholder" />
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Directors Digest</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="filmography">Filmography</string>
+    <string name="tommy_wiseau">Tommy Wiseau</string>
+    <string name="the_room">The Room</string>
+    <string name="tommy_bio">One of the greatest</string>
+    <string name="films">Films</string>
+    <string name="room_synopsis">Johnny is a successful bank executive who lives quietly in a San Francisco townhouse with his fiancée, Lisa. One day, putting aside any scruple, she seduces Johnny\'s best friend, Mark. From there, nothing will be the same again.</string>
+    <string name="room_trailer">9-dIdFXeFhs</string>
+    <string name="check_internet_connection">Check your Internet connection</string>
+</resources>
