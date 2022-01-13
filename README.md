@@ -1,6 +1,6 @@
 ![project_banner](/media/dd_banner.png)
 
-# DirectorsDigest
+# Directors Digest
 A simple Android application showing lists of directors and their films. Data is fetched from a remote source and stored into the local database.
 
 ## Done with use of:
