@@ -1,7 +1,7 @@
 ![project_banner](/media/dd_banner.png)
 
 # Directors Digest
-A simple Android application showing lists of directors and their films. Data is fetched from a remote source and stored into the local database. If there are any errors in data fetching, default data is shown - default Director is Tommy Wiseau and default film is The Room.
+A simple Android application showing lists of directors and their films. Data is fetched from a remote source and stored into the local database. If there are any errors in data fetching, default data is shown - default director is Tommy Wiseau and default film is The Room.
 
 ## Done with use of:
 - [MVVM architecure](https://cdn-blog.scalablepath.com/uploads/2021/12/mvvm-reactive-architecture-1024x937.png)
