@@ -9,6 +9,9 @@ import com.govorimo.directorsdigest.network.MainApiService
 import com.govorimo.directorsdigest.persistence.AppDatabase
 import com.govorimo.directorsdigest.persistence.DirectorsDao
 import com.govorimo.directorsdigest.persistence.FilmsDao
+import com.govorimo.directorsdigest.repository.BaseMainRepository
+import com.govorimo.directorsdigest.repository.DirectorsLocalDataSource
+import com.govorimo.directorsdigest.repository.DirectorsRemoteDataSource
 import com.govorimo.directorsdigest.repository.MainRepository
 import dagger.Module
 import dagger.Provides
@@ -84,12 +87,23 @@ object AppModule {
         return provideRetrofitBuilder(provideGsonBuilder(), okClient).build().create(MainApiService::class.java)
     }
 
+    @Singleton
+    @Provides
+    fun provideDirectorsLocalDataSource(directorsDao: DirectorsDao, filmsDao: FilmsDao): DirectorsLocalDataSource{
+        return DirectorsLocalDataSource(directorsDao = directorsDao, filmsDao = filmsDao)
+    }
+
+/*    @Singleton
+    @Provides
+    fun provideDirectorsRemoteDataSource(mainApiService: MainApiService, token: String): DirectorsRemoteDataSource{
+        return DirectorsRemoteDataSource(mainApiService = mainApiService, token = token)
+    }*/
 
 
     @Singleton
     @Provides
-    fun provideDirectorRepository(mainApiService: MainApiService, directorsDao: DirectorsDao, filmsDao: FilmsDao): MainRepository {
-        return MainRepository(mainApiService = mainApiService, directorsDao = directorsDao, filmsDao = filmsDao)
+    fun provideDirectorRepository(localDataSource: DirectorsLocalDataSource, remoteDataSource: DirectorsRemoteDataSource): BaseMainRepository {
+        return MainRepository(localDataSource = localDataSource, remoteDataSource = remoteDataSource)
     }
 
 

@@ -7,12 +7,10 @@ import retrofit2.http.Header
 
 interface MainApiService {
 
-
     @GET("directors")
     suspend fun getDirectorResponse(@Header("Authorization") token: String): DirectorResponse
 
     @GET("films")
     suspend fun getFilmResponse(@Header("Authorization") token: String): FilmResponse
-
 
 }

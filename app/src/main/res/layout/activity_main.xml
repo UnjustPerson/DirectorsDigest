@@ -45,7 +45,7 @@
         android:layout_width="match_parent"
         android:background="#FFFDC4"
         android:fontFamily="@font/raleway_semibold"
-        android:layout_height="71dp"
+        android:layout_height="61dp"
         app:itemIconTint="@color/colors_selector"
         app:itemTextColor="@color/colors_selector"
         app:itemTextAppearanceActive="@style/BottomNavigationView.Active"

@@ -43,7 +43,7 @@ class FilmsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.makeFilmsCall()
+        viewModel.getFilms()
 
         subscribeObservers()
         initRecyclerView()
@@ -55,16 +55,6 @@ class FilmsFragment : Fragment() {
             filmsAdapter = FilmographyAdapter(requireActivity())
             adapter = filmsAdapter
         }
-/*        viewModel.films.observe(viewLifecycleOwner, Observer{
-            if(it != null){
-                filmsAdapter?.films = it
-                binding.filmRecycler.adapter = filmsAdapter
-            }
-            else{
-                filmsAdapter?.films = getRoomList(resources)
-                binding.filmRecycler.adapter = filmsAdapter
-            }
-        })*/
     }
 
     private fun subscribeObservers(){

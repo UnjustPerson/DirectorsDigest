@@ -4,6 +4,8 @@ import android.util.Log
 import androidx.lifecycle.*
 import com.govorimo.directorsdigest.persistence.models.Director
 import com.govorimo.directorsdigest.persistence.models.Film
+import com.govorimo.directorsdigest.repository.BaseMainRepository
+import com.govorimo.directorsdigest.repository.DirectorsDataSource
 import com.govorimo.directorsdigest.repository.MainRepository
 import com.govorimo.directorsdigest.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -14,8 +16,7 @@ import javax.inject.Named
 @HiltViewModel
 class MainViewModel
 @Inject
-constructor (private val repository: MainRepository,
-             @Named("auth_token") var token: String): ViewModel() {
+constructor (private val repository: BaseMainRepository): ViewModel() {
 
     private var _isLoading: MutableLiveData<Boolean> = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
@@ -26,10 +27,13 @@ constructor (private val repository: MainRepository,
     private var _films = MutableLiveData<List<Film>?>()
     val films: LiveData<List<Film>?> = _films
 
-    fun makeDirectorsCall() {
+    init{
         _isLoading.value = true
+    }
+
+    fun getDirectors() {
         viewModelScope.launch {
-            when(val response = repository.makeDirectorsCall(token)){
+            when(val response = repository.getDirectors()){
                 is Resource.Success -> {
                     _isLoading.value = false
                     if (response.data != null) {
@@ -43,15 +47,12 @@ constructor (private val repository: MainRepository,
                 }
                 is Resource.Loading -> _isLoading.value = true
             }
-            Log.d("tebramoi", "${_directors.value}")
         }
     }
 
-
-    fun makeFilmsCall() {
-        _isLoading.value = true
+    fun getFilms() {
         viewModelScope.launch {
-            when(val response = repository.makeFilmsCall(token)){
+            when(val response = repository.getFilms()){
                 is Resource.Success -> {
                     _isLoading.value = false
                     if (response.data != null) {
@@ -65,7 +66,6 @@ constructor (private val repository: MainRepository,
                 }
                 is Resource.Loading -> _isLoading.value = true
             }
-            Log.d("tebramoi", "${_directors.value}")
         }
     }
 

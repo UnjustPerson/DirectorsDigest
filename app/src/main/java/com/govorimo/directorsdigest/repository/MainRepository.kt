@@ -1,5 +1,6 @@
 package com.govorimo.directorsdigest.repository
 
+import android.util.Log
 import com.govorimo.directorsdigest.persistence.models.Director
 import com.govorimo.directorsdigest.persistence.models.Film
 import com.govorimo.directorsdigest.network.MainApiService
@@ -8,67 +9,76 @@ import com.govorimo.directorsdigest.network.models.toFilm
 import com.govorimo.directorsdigest.persistence.DirectorsDao
 import com.govorimo.directorsdigest.persistence.FilmsDao
 import com.govorimo.directorsdigest.util.Resource
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.withContext
 
-class MainRepository(private val mainApiService: MainApiService,
-                     private val directorsDao: DirectorsDao,
-                     private val filmsDao: FilmsDao): BaseRepository() {
+class MainRepository(private val remoteDataSource: DirectorsDataSource,
+                     private val localDataSource: DirectorsDataSource,
+                     private val ioDispatcher: CoroutineDispatcher = IO) : BaseMainRepository {
 
 
-    suspend fun makeDirectorsCall(token: String): Resource<List<Director>?> {
-        val directors = directorsDao.getDirectors()
-        if(directors == emptyList<Director>()){
-            return withContext(IO) {
-                when (val response = safeCall { mainApiService.getDirectorResponse(token) }) {
-                    is Resource.Success -> {
-                        if (response.data != null) {
-                            Resource.Success(response.data.results.map{ it.toDirector() }).also {
-                                directorsDao.insertDirectors(response.data.results.map{ it.toDirector()})
-                            }
-                        } else {
-                            Resource.Success(null)
+    override suspend fun getDirectors(): Resource<List<Director>> {
+        val localDirectors = localDataSource.getDirectors()
+        if(shouldFetchDirectors()){
+            val remoteDirectors = remoteDataSource.getDirectors()
+            return when(remoteDirectors){
+                is Resource.Success -> {
+                    if (!remoteDirectors.data.isNullOrEmpty())
+                        withContext(ioDispatcher){
+                            insertDirectors(remoteDirectors.data)
                         }
-                    }
-                    is Resource.Failure -> {
-                        Resource.Failure(response.exception)
-                    }
-                    else -> Resource.Loading
+                    remoteDirectors
                 }
-
+                is Resource.Failure -> remoteDirectors
+                is Resource.Loading -> remoteDirectors
             }
         }
         else{
-            return safeCall { directorsDao.getDirectors() }
+            return localDirectors
         }
+    }
+    // tests
+    // if shouldfetchdirectors == true
+
+
+
+    override suspend fun insertDirectors(directors: List<Director>) {
+        localDataSource.insertDirectors(directors)
+    }
+
+    suspend fun shouldFetchDirectors(): Boolean{
+        val localDirectors = localDataSource.getDirectors()
+        return localDirectors == Resource.Success(emptyList<Director>())
     }
 
 
-    suspend fun makeFilmsCall(token: String): Resource<List<Film>?> {
-        val films = filmsDao.getFilms()
-        if(films == emptyList<Film>()){
-            return withContext(IO) {
-                when (val response = safeCall { mainApiService.getFilmResponse(token) }) {
-                    is Resource.Success -> {
-                        if (response.data != null) {
-                            Resource.Success(response.data.results.map{ it.toFilm() }).also {
-                                filmsDao.insertFilms(response.data.results.map{ it.toFilm()})
-                            }
-                        } else {
-                            Resource.Success(null)
-                        }
-                    }
-                    is Resource.Failure -> {
-                        Resource.Failure(response.exception)
-                    }
-                    else -> Resource.Loading
-                }
 
+    override suspend fun getFilms(): Resource<List<Film>> {
+        val localFilms = localDataSource.getFilms()
+        if(localFilms == Resource.Success(emptyList<Film>())){
+            val remoteFilms = remoteDataSource.getFilms()
+            return when(remoteFilms){
+                is Resource.Success -> {
+                    if (!remoteFilms.data.isNullOrEmpty())
+                        withContext(ioDispatcher){
+                            insertFilms(remoteFilms.data)
+                        }
+                    remoteFilms
+                }
+                is Resource.Failure -> remoteFilms
+                is Resource.Loading -> remoteFilms
             }
         }
         else{
-            return safeCall { filmsDao.getFilms() }
+            return localFilms
         }
     }
+
+    override suspend fun insertFilms(films: List<Film>) {
+        localDataSource.insertFilms(films)
+    }
+
 
 }
